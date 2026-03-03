@@ -28,13 +28,11 @@ if r_main_page.status_code == 200:
     music = soup.find_all('div', class_='song-item')
     list_links = code_in_each_songs.danh_sach_ket_qua
 
-    # Lấy thời gian cố định 1 lần duy nhất
+    # Lấy thời gian cố định 1 lần duy nhất => Chuẩn hóa định dạng
     gio_co_dinh = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     print(f"Bắt đầu quét lúc: {gio_co_dinh}")
 
-    # =================================================================
     # THAY ĐỔI: Dùng range(len(...)) thay vì enumerate
-    # =================================================================
     # range(len(music)) sẽ tạo ra dãy số: 0, 1, 2, 3... đến hết danh sách
     for index in range(len(music)):
         
@@ -42,6 +40,7 @@ if r_main_page.status_code == 200:
         song = music[index] 
         
         try:
+            # Chuẩn hóa dữ liệu không đồng nhất
             song_name = song.find('div', class_='song-name').text.strip()
             rank_tag = song.find('span', class_="idx")
             song_rank = rank_tag.text.strip() if rank_tag else str(index + 1)
@@ -52,10 +51,11 @@ if r_main_page.status_code == 200:
             if index < len(list_links):
                 url_song = list_links[index]
 
-            # Biến chứa dữ liệu
+            # Biến chứa dữ liệu => Xử lý Missing Data
             view_hien_thi = "0" 
             share_hien_thi = "0"
             
+            # Loại bỏ giá trị bất thường
             if url_song != "N/A" and url_song.startswith("http"):
                 try:
                     r_detail = requests.get(url_song, headers=headers, timeout=5)
