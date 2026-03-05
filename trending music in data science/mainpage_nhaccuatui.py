@@ -108,3 +108,4 @@ if list_top_trending:
 else:
 
     print("There is no data available to write to the file.")
+
