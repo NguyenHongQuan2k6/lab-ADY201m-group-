@@ -1,5 +1,5 @@
 import pandas as pd
-import mainpage_nhaccuatui as mp
+import database_nhaccuatui as mp
 
 # Bế thẳng danh sách dữ liệu từ mainpage vào Pandas
 df = pd.DataFrame(mp.list_top_trending)
