@@ -1,5 +1,5 @@
 import pandas as pd
-import mainpage_Lastfm as mp
+import database_Lastfm as mp
 
 # 1. Bế thẳng danh sách dữ liệu từ mainpage vào Pandas
 df = pd.DataFrame(mp.list_top_trending)
